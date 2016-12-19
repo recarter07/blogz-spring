@@ -6,9 +6,11 @@
 
 <div th:replace="template :: navigation"></div>
 
-<h1>blog posts!</h1>
+<h1 th:text="${subheading}"></h1>
 
-<div th:each="post : ${posts}">
+<!--   <h1>Blog Posts!</h1>  -->
+
+<div th:each="post : ${subPosts}">
 
 	<h2><a th:href="'/blog/' + ${post.author.username} + '/' + ${post.uid}" th:text="${post.title}"></a></h2>
 	<p th:text="${post.body}"></p>

@@ -1,6 +1,8 @@
 package org.launchcode.blogz.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,6 +59,13 @@ public class Post extends AbstractEntity {
 		this.updated();
 	}
 	
+    // find all posts and return in list
+    public List<Post> findAll(String post) {
+    	List<Post> posts = new ArrayList<Post>();
+    	return posts;
+    }
+	
+	// many posts to one author
 	@ManyToOne
 	public User getAuthor() {
 		return author;
@@ -68,7 +77,7 @@ public class Post extends AbstractEntity {
 	}
 	
 	@NotNull
-	@OrderColumn
+	@OrderColumn      // order by date
 	@Column(name = "created")
 	public Date getCreated() {
 		return created;
@@ -93,5 +102,5 @@ public class Post extends AbstractEntity {
 	private void updated() {
 		this.modified = new Date();
 	}
-	
+    
 }

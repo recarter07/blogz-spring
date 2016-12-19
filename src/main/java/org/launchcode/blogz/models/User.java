@@ -21,8 +21,10 @@ public class User extends AbstractEntity {
 	private String pwHash;
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
+	// all posts by a given user
 	private List<Post> posts;
 	
+	// no-arg constructor, for Hibernate (req, as are setters for all db columns)
 	public User() {}
 	
 	public User(String username, String password) {
@@ -64,16 +66,21 @@ public class User extends AbstractEntity {
 		this.username = username;
 	}
 	
+	// Checks that the given password is correct for the user
+	// must have user obj to call with some value to match like:
+	// User.isMatchingPassword(...)
 	public boolean isMatchingPassword(String password) {
 		return encoder.matches(password, pwHash);
 	}
 	
+	// Checks that the password meets minimum standards
 	public static boolean isValidPassword(String password) {
-		Pattern validUsernamePattern = Pattern.compile("(\\S){6,20}");
+		Pattern validUsernamePattern = Pattern.compile("(\\S){6,20}");  // can't have whitespace, must be b/w 6 and 20 char long
 		Matcher matcher = validUsernamePattern.matcher(password);
 		return matcher.matches();
 	}
 	
+	// Checks that the username meets minimum standards
 	public static boolean isValidUsername(String username) {
 		Pattern validUsernamePattern = Pattern.compile("[a-zA-Z][a-zA-Z0-9_-]{4,11}");
 		Matcher matcher = validUsernamePattern.matcher(username);
@@ -84,8 +91,9 @@ public class User extends AbstractEntity {
 		posts.add(post);
 	}
 	
-	@OneToMany
-    @JoinColumn(name = "author_uid")
+	// how to get all posts for single user
+	@OneToMany     // one user, many posts
+    @JoinColumn(name = "author_uid")    // primary key to join tables
     public List<Post> getPosts() {
         return posts;
     }

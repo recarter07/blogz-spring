@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="template :: dochead">
-</head>
-<body>
+	<head th:replace="template :: dochead">
+	</head>
+	<body>
 
 	<div th:replace="template :: navigation"></div>
 
-	<h1>blog users!</h1>
+	<h1>Blog Users!</h1>
 
 	<!--  TODO - list all users, with links to their blog pages -->
+<!--	<h3 th:text="${username}"></h3> -->    <!-- RC Code, list all users... -->
+<!--	<a th:href="${subAuthorURL}" th:text="${subUsername}">There! Now...</a> -->
+	
+	<ul th:each="user,iterStat : ${subUsers}">
+    	<li><a th:href="'/blog/' + ${user.getUsername()}" th:text="${user.getUsername()}">Onions</a></li>
+	</ul>
+	
+	
+	
+<!--	<h3 th:href="www.launchcode.org"></h3> --> <!-- RC Code, permalinks? Nope!... -->
+<!-- 	<h3 th:href="@{../blog/${username}"}></h3>  -->
 
-</body>
+	</body>
 </html>

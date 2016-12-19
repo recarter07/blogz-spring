@@ -7,12 +7,12 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity {   // so named b/c annotations are also classes, and there is an Entity annotation already
 
 	private int uid;
 	
-	@Id
-    @GeneratedValue
+	@Id                // primary key
+    @GeneratedValue    // Hibernate will generate this value for me
     @NotNull
     @Column(name = "uid", unique = true)
 	public int getUid() {

@@ -1,4 +1,4 @@
-package org.launchcode;
+ package org.launchcode;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    UserDao userDao;
+    @Autowired                 // Spring will set this class up for me
+    UserDao userDao;           // data access obj, used to pull users out of database
 
-    @Override
+    @Override     // called every time a user attempts to access a restricted URL
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
     	// restricted URLs
